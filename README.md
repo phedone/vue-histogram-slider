@@ -33,11 +33,10 @@ If you are a try and learn developer, you can start trying the vue3-histogram-sl
 
 ## 🔧 Usage
 ```js
-import Vue from 'vue';
-import HistogramSlider from 'vue3-histogram-slider';
-import 'vue3-histogram-slider/dist/histogram-slider.css';
-
-Vue.component(HistogramSlider.name, HistogramSlider);
+import HistogramSlider from "vue3-histogram-slider";
+import "vue3-histogram-slider/dist/histogram-slider.css";
+...
+app.component(HistogramSlider.name, HistogramSlider);
 ```
 
 ```xml
