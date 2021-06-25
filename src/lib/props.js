@@ -60,7 +60,7 @@ export default {
   type: {
     type: String,
     default: 'double',
-    validator: function(value) {
+    validator: function (value) {
       return ['double', 'single'].indexOf(value) !== -1
     }
   },

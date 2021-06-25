@@ -14,7 +14,7 @@
 </template>
 
 <script>
-var $ = require('jquery')
+let $ = require('jquery')
 import './range-slider'
 import props from './props'
 import * as d3Scale from 'd3-scale'
@@ -68,15 +68,15 @@ export default {
     const min = this.min || d3Array.min(this.data)
     const max = this.max || d3Array.max(this.data)
     const isTypeSingle = this.type == 'single'
-    var svg, histogram, x, y, hist, bins, colors, brush
+    let svg, histogram, x, y, hist, bins, colors, brush
 
-    this.updateBarColor = val => {
-      var transition = d3Trans.transition().duration(this.transitionDuration)
+    this.updateBarColor = (val) => {
+      let transition = d3Trans.transition().duration(this.transitionDuration)
 
       d3Trans
         .transition(transition)
         .selectAll(`.vue-histogram-slider-bar-${this.id}`)
-        .attr('fill', d => {
+        .attr('fill', (d) => {
           if (isTypeSingle) {
             return d.x0 < val.from ? colors(d.x0) : this.holderColor
           }
@@ -85,11 +85,7 @@ export default {
     }
 
     // x scale for time
-    x = d3Scale
-      .scaleLinear()
-      .domain([min, max])
-      .range([0, width])
-      .clamp(true)
+    x = d3Scale.scaleLinear().domain([min, max]).range([0, width]).clamp(true)
 
     // y scale for histogram
     y = d3Scale.scaleLinear().range([this.barHeight, 0])
@@ -116,10 +112,7 @@ export default {
     }
 
     if (this.colors) {
-      colors = d3Scale
-        .scaleLinear()
-        .domain([min, max])
-        .range(this.colors)
+      colors = d3Scale.scaleLinear().domain([min, max]).range(this.colors)
     } else {
       colors = () => this.primaryColor
     }
@@ -137,7 +130,7 @@ export default {
       // group data for bars
       bins = histogram(this.data)
 
-      y.domain([0, d3Array.max(bins, d => d.length)])
+      y.domain([0, d3Array.max(bins, (d) => d.length)])
 
       hist
         .selectAll(`.vue-histogram-slider-bar-${this.id}`)
@@ -145,13 +138,13 @@ export default {
         .enter()
         .insert('rect', 'rect.overlay')
         .attr('class', `vue-histogram-slider-bar-${this.id}`)
-        .attr('x', d => x(d.x0))
-        .attr('y', d => y(d.length))
+        .attr('x', (d) => x(d.x0))
+        .attr('y', (d) => y(d.length))
         .attr('rx', this.barRadius)
         .attr('width', this.barWidth)
         .transition(transition)
-        .attr('height', d => this.barHeight - y(d.length))
-        .attr('fill', d => (isTypeSingle ? this.holderColor : colors(d.x0)))
+        .attr('height', (d) => this.barHeight - y(d.length))
+        .attr('fill', (d) => (isTypeSingle ? this.holderColor : colors(d.x0)))
 
       if (this.ionRangeSlider) {
         this.ionRangeSlider.destroy()
@@ -176,19 +169,19 @@ export default {
         block: this.block,
         keyboard: this.keyboard,
         prettify: this.prettify,
-        onStart: val => {
+        onStart: (val) => {
           this.$emit('start', val)
         },
-        onUpdate: val => {
+        onUpdate: (val) => {
           this.$emit('update', val)
         },
-        onFinish: val => {
+        onFinish: (val) => {
           if (!this.updateColorOnChange) {
             this.updateBarColor(val)
           }
           this.$emit('finish', val)
         },
-        onChange: val => {
+        onChange: (val) => {
           if (this.updateColorOnChange) {
             this.updateBarColor(val)
           }
@@ -206,9 +199,9 @@ export default {
 
     if (this.clip) {
       brush = d3Brush.brushX().on('end', () => {
-        var extent = d3Select.event.selection
+        let extent = d3Select.event.selection
         if (extent) {
-          var domain = [x.invert(extent[0]), x.invert(extent[1])]
+          let domain = [x.invert(extent[0]), x.invert(extent[1])]
           x.domain(domain)
           const pos = {
             from: Math.max(domain[0], this.ionRangeSlider.result.from),
@@ -227,7 +220,7 @@ export default {
     updateHistogram([min, max])
   },
 
-  destroyed() {
+  unmounted() {
     this.ionRangeSlider.destroy()
   }
 }
@@ -240,7 +233,7 @@ export default {
 
 .slider-wrapper {
   width: 100%;
-  margin-top: var(--hist-slider-gap);
+  margin-top: let(--hist-slider-gap);
 }
 
 .vue-histogram-slider-wrapper {
@@ -254,8 +247,8 @@ export default {
 }
 
 .irs {
-  font-family: var(--font-family);
-  font-size: var(--font-size);
+  font-family: let(--font-family);
+  font-size: let(--font-size);
   position: relative;
   display: block;
   -webkit-touch-callout: none;
@@ -351,7 +344,7 @@ export default {
 }
 
 .irs-grid-pol.small {
-  height: var(--line-height);
+  height: let(--line-height);
 }
 
 .irs-grid-text {
@@ -417,15 +410,15 @@ export default {
 
 .irs--round .irs-line {
   top: 36px;
-  height: var(--line-height);
-  background-color: var(--holder-color);
-  border-radius: var(--line-height);
+  height: let(--line-height);
+  background-color: let(--holder-color);
+  border-radius: let(--line-height);
 }
 
 .irs--round .irs-bar {
   top: 36px;
-  height: var(--line-height);
-  background-color: var(--primary-color);
+  height: let(--line-height);
+  background-color: let(--primary-color);
 }
 
 .irs--round .irs-bar--single {
@@ -433,17 +426,17 @@ export default {
 }
 
 .irs--round .irs-shadow {
-  height: var(--line-height);
+  height: let(--line-height);
   bottom: 21px;
   background-color: rgba(222, 228, 236, 0.5);
 }
 
 .irs--round .irs-handle {
   cursor: pointer;
-  top: calc(50% - var(--handle-size) / 2 + 5px);
-  width: var(--handle-size);
-  height: var(--handle-size);
-  background-color: var(--handle-color);
+  top: calc(50% - let(--handle-size) / 2 + 5px);
+  width: let(--handle-size);
+  height: let(--handle-size);
+  background-color: let(--handle-color);
   z-index: 9;
   border-radius: 50%;
   box-shadow: 0 1px 3px rgba(0, 0, 255, 0.3);
@@ -473,7 +466,7 @@ export default {
   line-height: 1;
   text-shadow: none;
   padding: 3px 5px;
-  background-color: var(--label-color);
+  background-color: let(--label-color);
   color: white;
   border-radius: 4px;
 }
@@ -491,7 +484,7 @@ export default {
   margin-left: -3px;
   overflow: hidden;
   border: 3px solid transparent;
-  border-top-color: var(--primary-color);
+  border-top-color: let(--primary-color);
 }
 
 .irs--round .irs-grid {
@@ -503,7 +496,7 @@ export default {
 }
 
 .irs--round .irs-grid-text {
-  color: var(--grid-text-color);
+  color: let(--grid-text-color);
   font-size: 13px;
 }
 </style>
