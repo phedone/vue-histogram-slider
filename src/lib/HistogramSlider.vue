@@ -1,9 +1,10 @@
+<!--suppress ALL -->
 <template>
-  <div :style="style" class="vue-histogram-slider-wrapper">
+  <div :style="style" :id="`parent_${id}`" class="vue-histogram-slider-wrapper">
     <svg :id="id" class="vue-histogram-view">
       <defs>
         <clipPath :id="clipId">
-          <rect :width="width" :height="barHeight" x="0" y="0" />
+          <rect width="100%" :height="barHeight" x="0" y="0" />
         </clipPath>
       </defs>
     </svg>
@@ -39,7 +40,7 @@ export default {
   computed: {
     style() {
       return `
-        width: ${this.width}px;
+        width: ${this.computedWidth};
         --primary-color: ${this.primaryColor};
         --label-color: ${this.labelColor};
         --holder-color: ${this.holderColor};
@@ -51,6 +52,11 @@ export default {
         --hist-slider-gap: ${-36 + this.histSliderGap}px;
         --handle-size: ${this.handleSize}px;
       `
+    },
+    computedWidth() {
+      return Object.prototype.toString.call(this.width) === '[object String]'
+        ? this.width
+        : this.width + 'px'
     }
   },
 
@@ -64,7 +70,8 @@ export default {
   },
 
   mounted() {
-    const width = this.width - 20
+    const width = document.querySelector(`#parent_${this.id}`).clientWidth - 20
+
     const min = this.min || d3Array.min(this.data)
     const max = this.max || d3Array.max(this.data)
     const isTypeSingle = this.type == 'single'

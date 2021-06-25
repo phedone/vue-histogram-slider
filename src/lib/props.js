@@ -65,7 +65,7 @@ export default {
     }
   },
   width: {
-    type: Number,
+    type: [Number, String],
     default: 650
   },
   barHeight: {
