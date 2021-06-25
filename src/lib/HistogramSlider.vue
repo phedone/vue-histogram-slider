@@ -233,7 +233,7 @@ export default {
 
 .slider-wrapper {
   width: 100%;
-  margin-top: let(--hist-slider-gap);
+  margin-top: var(--hist-slider-gap);
 }
 
 .vue-histogram-slider-wrapper {
@@ -247,8 +247,8 @@ export default {
 }
 
 .irs {
-  font-family: let(--font-family);
-  font-size: let(--font-size);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
   position: relative;
   display: block;
   -webkit-touch-callout: none;
@@ -344,7 +344,7 @@ export default {
 }
 
 .irs-grid-pol.small {
-  height: let(--line-height);
+  height: var(--line-height);
 }
 
 .irs-grid-text {
@@ -410,15 +410,15 @@ export default {
 
 .irs--round .irs-line {
   top: 36px;
-  height: let(--line-height);
-  background-color: let(--holder-color);
-  border-radius: let(--line-height);
+  height: var(--line-height);
+  background-color: var(--holder-color);
+  border-radius: var(--line-height);
 }
 
 .irs--round .irs-bar {
   top: 36px;
-  height: let(--line-height);
-  background-color: let(--primary-color);
+  height: var(--line-height);
+  background-color: var(--primary-color);
 }
 
 .irs--round .irs-bar--single {
@@ -426,17 +426,17 @@ export default {
 }
 
 .irs--round .irs-shadow {
-  height: let(--line-height);
+  height: var(--line-height);
   bottom: 21px;
   background-color: rgba(222, 228, 236, 0.5);
 }
 
 .irs--round .irs-handle {
   cursor: pointer;
-  top: calc(50% - let(--handle-size) / 2 + 5px);
-  width: let(--handle-size);
-  height: let(--handle-size);
-  background-color: let(--handle-color);
+  top: calc(50% - var(--handle-size) / 2 + 5px);
+  width: var(--handle-size);
+  height: var(--handle-size);
+  background-color: var(--handle-color);
   z-index: 9;
   border-radius: 50%;
   box-shadow: 0 1px 3px rgba(0, 0, 255, 0.3);
@@ -466,7 +466,7 @@ export default {
   line-height: 1;
   text-shadow: none;
   padding: 3px 5px;
-  background-color: let(--label-color);
+  background-color: var(--label-color);
   color: white;
   border-radius: 4px;
 }
@@ -484,7 +484,7 @@ export default {
   margin-left: -3px;
   overflow: hidden;
   border: 3px solid transparent;
-  border-top-color: let(--primary-color);
+  border-top-color: var(--primary-color);
 }
 
 .irs--round .irs-grid {
@@ -496,7 +496,7 @@ export default {
 }
 
 .irs--round .irs-grid-text {
-  color: let(--grid-text-color);
+  color: var(--grid-text-color);
   font-size: 13px;
 }
 </style>
