@@ -21,7 +21,7 @@ If you are a try and learn developer, you can start trying the vue3-histogram-sl
 
 
 <p align="center">
-    <img src="https://github.com/oguzhaninan/vue3-histogram-slider/raw/master/resources/histogram-slider-demo.gif">
+    <img src="https://github.com/phedone/vue3-histogram-slider/raw/master/resources/histogram-slider-demo.gif">
 </p>
 
 ## 📦 Installation    
@@ -66,7 +66,7 @@ forceEdges|boolean|false|Slider will be always inside it's container.
 dragInterval|boolean|false|Allow user to drag whole range. Only in double type
 keyboard|boolean|true|Activates keyboard controls. Move left: ←, ↓, A, S. Move right: →, ↑, W, D.
 type|string|double|Choose slider type, could be single - for one handle, or double for two handles
-width|number|600|width of dialog
+width|number or string|600|width of histogram
 barHeight|number|100|Set max histogram bar height
 barWidth|number|6|Set histogram bar width
 barGap|number|5|Set histogram bar gap
