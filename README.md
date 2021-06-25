@@ -1,19 +1,19 @@
 <p align="center">
-    <img src="https://github.com/oguzhaninan/vue-histogram-slider/raw/master/resources/header.png" width="500">
+    <img src="https://github.com/phedone/vue3-histogram-slider/raw/master/resources/header.png" width="500">
 </p>
 <p align="center">
- Range slider with histogram for <a href="http://vuejs.org/" rel="nofollow" class="rich-diff-level-one">Vue</a>
+ Range slider with histogram for <a href="http://vuejs.org/" rel="nofollow" class="rich-diff-level-one">Vue 3</a>
 </p>
 <p align="center">
-    <img src="https://img.shields.io/github/license/oguzhaninan/vue-histogram-slider?style=flat-square" />
-    <img alt="npm" src="https://img.shields.io/npm/dm/vue-histogram-slider?style=flat-square">
-    <img alt="GitHub issues" src="https://img.shields.io/github/issues/oguzhaninan/vue-histogram-slider?style=flat-square">
-    <img alt="npm" src="https://img.shields.io/npm/v/vue-histogram-slider?style=flat-square">
+    <img src="https://img.shields.io/github/license/phedone/vue3-histogram-slider?style=flat-square" />
+    <img alt="npm" src="https://img.shields.io/npm/dm/vue3-histogram-slider?style=flat-square">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/phedone/vue3-histogram-slider?style=flat-square">
+    <img alt="npm" src="https://img.shields.io/npm/v/vue3-histogram-slider?style=flat-square">
 </p>
 <hr>
 
 ## 🚀 Quick Start
-If you are a try and learn developer, you can start trying the vue-histogram-slider now using codesandbox.io.
+If you are a try and learn developer, you can start trying the vue3-histogram-slider now using codesandbox.io.
 
 <a href="https://codesandbox.io/s/vue-histogram-slider-b7m0e?fontsize=14" target="_blank">
   <img alt="Edit Vue Histogram Slider" src="https://codesandbox.io/static/img/play-codesandbox.svg">
@@ -21,21 +21,21 @@ If you are a try and learn developer, you can start trying the vue-histogram-sli
 
 
 <p align="center">
-    <img src="https://github.com/oguzhaninan/vue-histogram-slider/raw/master/resources/histogram-slider-demo.gif">
+    <img src="https://github.com/oguzhaninan/vue3-histogram-slider/raw/master/resources/histogram-slider-demo.gif">
 </p>
 
 ## 📦 Installation    
 ### yarn
-`yarn add vue-histogram-slider`
+`yarn add vue3-histogram-slider`
 
 ### npm
-`npm i vue-histogram-slider`
+`npm i vue3-histogram-slider`
 
 ## 🔧 Usage
 ```js
 import Vue from 'vue';
-import HistogramSlider from 'vue-histogram-slider';
-import 'vue-histogram-slider/dist/histogram-slider.css';
+import HistogramSlider from 'vue3-histogram-slider';
+import 'vue3-histogram-slider/dist/histogram-slider.css';
 
 Vue.component(HistogramSlider.name, HistogramSlider);
 ```
