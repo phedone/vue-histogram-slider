@@ -1,10 +1,10 @@
 <!--suppress ALL -->
 <template>
-  <div :style="style" :id="`parent_${id}`" class="vue-histogram-slider-wrapper">
+  <div :style="style" :id="`parent_${elementId}`" class="vue-histogram-slider-wrapper">
     <slot v-if="resettable && zoomed" :reset="reset"
       ><button @click="reset">Reset zoom</button></slot
     >
-    <svg :id="id" class="vue-histogram-view">
+    <svg :id="elementId" class="vue-histogram-view">
       <defs>
         <clipPath :id="clipId">
           <rect width="100%" :height="barHeight" x="0" y="0" />
@@ -21,6 +21,7 @@
 let $ = require('jquery')
 import './range-slider'
 import props from './props'
+import { nextTick } from 'vue'
 import * as d3Scale from 'd3-scale'
 import * as d3Array from 'd3-array'
 import * as d3Select from 'd3-selection'
@@ -34,10 +35,8 @@ export default {
 
   data() {
     return {
-      id: `vue-histogram-${this._uid}`,
-      histogramId: `histogram-slider-${this._uid}`,
-      clipId: `clip-${this._uid}`,
-      zoomed: false
+      zoomed: false,
+      uid: this.uuidv4()
     }
   },
 
@@ -61,12 +60,23 @@ export default {
       return Object.prototype.toString.call(this.width) === '[object String]'
         ? this.width
         : this.width + 'px'
+    },
+    elementId() {
+      return `vue-histogram-${this.uid}`
+    },
+    histogramId() {
+      return `histogram-slider-${this.uid}`
+    },
+    clipId() {
+      return `clip-${this.uid}`
     }
   },
 
   methods: {
-    init() {
-      const width = document.querySelector(`#parent_${this.id}`).clientWidth - 20
+    async init() {
+      await nextTick()
+      console.log(this.elementId)
+      const width = document.querySelector(`#parent_${this.elementId}`).clientWidth - 20
 
       const min = this.min || d3Array.min(this.data)
       const max = this.max || d3Array.max(this.data)
@@ -79,7 +89,7 @@ export default {
 
         d3Trans
           .transition(transition)
-          .selectAll(`.vue-histogram-slider-bar-${this.id}`)
+          .selectAll(`.vue-histogram-slider-bar-${this.elementId}`)
           .attr('fill', (d) => {
             if (isTypeSingle) {
               return d.x0 < val.from ? colors(d.x0) : this.holderColor
@@ -94,7 +104,10 @@ export default {
       // y scale for histogram
       y = d3Scale.scaleLinear().range([this.barHeight, 0])
 
-      svg = d3Select.select(`#${this.id}`).attr('width', width).attr('height', this.barHeight)
+      svg = d3Select
+        .select(`#${this.elementId}`)
+        .attr('width', width)
+        .attr('height', this.barHeight)
 
       hist = svg.append('g').attr('class', 'histogram')
 
@@ -111,7 +124,7 @@ export default {
       const updateHistogram = ([min, max]) => {
         let transition = d3Trans.transition().duration(this.transitionDuration)
 
-        hist.selectAll(`.vue-histogram-slider-bar-${this.id}`).remove()
+        hist.selectAll(`.vue-histogram-slider-bar-${this.elementId}`).remove()
 
         histogram = d3Array
           .bin()
@@ -124,11 +137,11 @@ export default {
         y.domain([0, d3Array.max(bins, (d) => d.length)])
 
         hist
-          .selectAll(`.vue-histogram-slider-bar-${this.id}`)
+          .selectAll(`.vue-histogram-slider-bar-${this.elementId}`)
           .data(bins)
           .enter()
           .insert('rect', 'rect.overlay')
-          .attr('class', `vue-histogram-slider-bar-${this.id}`)
+          .attr('class', `vue-histogram-slider-bar-${this.elementId}`)
           .attr('x', (d) => x(d.x0))
           .attr('y', (d) => y(d.length))
           .attr('rx', this.barRadius)
@@ -220,14 +233,21 @@ export default {
         this.updateBarColor({ from, to })
       }
     },
-    reset() {
-      d3Select.select(`#${this.id}`).selectAll('*').remove()
-      this.init()
+    async reset() {
+      d3Select.select(`#${this.elementId}`).selectAll('*').remove()
+      await this.init()
+    },
+    uuidv4() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (Math.random() * 16) | 0,
+          v = c == 'x' ? r : (r & 0x3) | 0x8
+        return v.toString(16)
+      })
     }
   },
-
-  mounted() {
-    this.init()
+  async mounted() {
+    this.uid = this.uuidv4()
+    await this.init()
   },
 
   unmounted() {

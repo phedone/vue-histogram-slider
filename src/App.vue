@@ -58,12 +58,6 @@ export default {
     finish(val) {}
   },
 
-  mounted() {
-    setTimeout(() => {
-      this.$refs.hist.update({ from: this.data[20], to: this.data[69] })
-    }, 2000)
-  },
-
   components: {
     HistogramSlider
   }
