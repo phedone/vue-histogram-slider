@@ -4,7 +4,7 @@
     <slot v-if="resettable && zoomed" :reset="reset"
       ><button @click="reset">Reset zoom</button></slot
     >
-    <svg :id="id" class="vue-histogram-view" :key="resetKey">
+    <svg :id="id" class="vue-histogram-view">
       <defs>
         <clipPath :id="clipId">
           <rect width="100%" :height="barHeight" x="0" y="0" />
