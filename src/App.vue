@@ -30,7 +30,11 @@
       @finish="finish"
       :force-edges="false"
       :colors="['#4facfe', '#00f2fe']"
-    />
+      v-slot="{ reset }"
+      resettable
+    >
+      <button @click="reset">Ah</button>
+    </HistogramSlider>
   </div>
 </template>
 
@@ -51,9 +55,7 @@ export default {
   },
 
   methods: {
-    finish(val) {
-      console.log(val)
-    }
+    finish(val) {}
   },
 
   mounted() {

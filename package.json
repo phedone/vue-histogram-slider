@@ -1,6 +1,6 @@
 {
   "name": "vue3-histogram-slider",
-  "version": "0.4.12",
+  "version": "0.4.14",
   "description": "Range slider with histogram for Vue 3",
   "scripts": {
     "serve": "vue-cli-service serve",

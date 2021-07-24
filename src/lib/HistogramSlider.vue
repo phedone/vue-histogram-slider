@@ -1,10 +1,10 @@
 <!--suppress ALL -->
 <template>
-  <div :style="style" :id="`parent_${id}`" class="vue-histogram-slider-wrapper" :key="resetKey">
-    <slot v-if="resettable" :reset="reset"
-      ><button v-if="zoomed" @click="reset">Reset zoom</button></slot
+  <div :style="style" :id="`parent_${id}`" class="vue-histogram-slider-wrapper">
+    <slot v-if="resettable && zoomed" :reset="reset"
+      ><button @click="reset">Reset zoom</button></slot
     >
-    <svg :id="id" class="vue-histogram-view">
+    <svg :id="id" class="vue-histogram-view" :key="resetKey">
       <defs>
         <clipPath :id="clipId">
           <rect width="100%" :height="barHeight" x="0" y="0" />
@@ -37,8 +37,7 @@ export default {
       id: `vue-histogram-${this._uid}`,
       histogramId: `histogram-slider-${this._uid}`,
       clipId: `clip-${this._uid}`,
-      zoomed: false,
-      resetKey: 0
+      zoomed: false
     }
   },
 
@@ -110,7 +109,6 @@ export default {
       }
 
       const updateHistogram = ([min, max]) => {
-        console.log({ min, max })
         let transition = d3Trans.transition().duration(this.transitionDuration)
 
         hist.selectAll(`.vue-histogram-slider-bar-${this.id}`).remove()
@@ -200,8 +198,6 @@ export default {
             this.minPos = this.ionRangeSlider.result.from
             this.maxPos = this.ionRangeSlider.result.to
 
-            console.log(this.minPos, this.maxPos)
-
             const pos = {
               from: Math.max(domain[0], this.ionRangeSlider.result.from),
               to: Math.min(domain[1], this.ionRangeSlider.result.to)
@@ -217,8 +213,6 @@ export default {
         hist.call(brush)
       }
       updateHistogram([min, max])
-
-      this.updateHistogram = updateHistogram
     },
     update({ from, to }) {
       if (this.ionRangeSlider) {
@@ -228,7 +222,6 @@ export default {
     },
     reset() {
       d3Select.select(`#${this.id}`).selectAll('*').remove()
-      this.updateHistogram([d3Array.min(this.data), d3Array.max(this.data)])
       this.init()
     }
   },
