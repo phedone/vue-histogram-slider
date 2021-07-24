@@ -135,5 +135,9 @@ export default {
   handleSize: {
     type: Number,
     default: 26
+  },
+  resettable: {
+    type: Boolean,
+    default: false
   }
 }

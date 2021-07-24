@@ -85,6 +85,7 @@ handleSize|number|26|Slider handle size
 histSliderGap|number|6|Set gap between slider and histogram
 updateColorOnChange|boolean|true|Update histogram bar color on change **(recommended false for performance)**
 clip|boolean|true|Allow dragging a selection to clip graph range
+resettable|boolean|false|Allow zoom reset to a button passed in a slot (with default slot available)
 
 ## 🔧 Event
 Name|Description
