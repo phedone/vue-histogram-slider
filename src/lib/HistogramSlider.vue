@@ -348,7 +348,7 @@ export default {
   left: 0;
   cursor: default;
   white-space: nowrap;
-  z-index: 99;
+  z-index: 9;
 }
 
 .irs-grid {
