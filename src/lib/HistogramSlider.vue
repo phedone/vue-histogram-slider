@@ -75,7 +75,6 @@ export default {
   methods: {
     async init() {
       await nextTick()
-      console.log(this.elementId)
       const width = document.querySelector(`#parent_${this.elementId}`).clientWidth - 20
 
       const min = this.min || d3Array.min(this.data)
